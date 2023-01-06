@@ -1,7 +1,7 @@
 <h1>Rails TurboChat</h1>
 <p> Realtime chat App with chatrooms</p>
 
-<%= link_to "Chatrooms", "#" %>
+<%= link_to "Chatrooms", rooms_path %>
 
 <% if current_user %>
   <%= button_to "Logout", destroy_user_session_path, method: :delete %>
