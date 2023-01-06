@@ -1,0 +1,6 @@
+<h6>Create new Room</h6>
+<%= form_with(model: @room, remote: true, class:'d-flex') do |f|%>
+  <%= f.text_field :name, class: 'form-control', placeholder: 'Room name', autocomplete: 'off' %>
+
+  <%= f.submit data: {disable_with: false}, class: 'btn btn-primary' %>
+<% end %>
