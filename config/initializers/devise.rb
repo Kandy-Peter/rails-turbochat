@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class TurboFailureApp < Devise::TurboFailureApp
+class TurboFailureApp < Devise::FailureApp
   def respond
     if request.format == :turbo_stream
       redirect
