@@ -4,17 +4,18 @@
       <%= current_user.email %>
     </h5>
     <h4>Users</h4>
-    <% turbo_stream_from "users" %>
+    <%= turbo_stream_from "users" %>
     <div id="users">
       <%= render @users %>
     </div>
 
     <h4>Rooms</h4>
-    <% turbo_stream_from "rooms" %>
-    <div id="rooms">
-      <%= render @rooms %>
-    </div>
+    <h4> Rooms </h4>
+    <%= turbo_stream_from "rooms" %>
     <%= render 'layouts/new_room_form' %>
+    <div id="rooms">
+      <%= render @rooms%>
+    </div>
   </div>
   <div id="room_container" class="col-md-8 col-sm-8 text-light bg-dark">
     <% if @single_room %>
@@ -22,7 +23,8 @@
         <h4 class="text-center">
           <%= @user&.email || @single_room.name %>
         </h4>
-        <div id="messages">
+        <%= turbo_stream_from @single_room %>
+        <div id="messages" data-controller = "scroll">
             <%= render @messages %>
         </div>
         <%= render 'layouts/new_message_form' %>
