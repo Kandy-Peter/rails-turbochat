@@ -22,6 +22,7 @@
         <h4 class="text-center">
           <%= @user&.email || @single_room.name %>
         </h4>
+        <%= turbo_stream_from @single_room %>
         <div id="messages">
             <%= render @messages %>
         </div>
