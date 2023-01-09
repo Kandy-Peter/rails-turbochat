@@ -14,9 +14,11 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    ActionCable.server.broadcast "user_#{current_user.id}_channel", { type: 'offline' }
+    current_user.update!(status: User.statuses[:offline])
+    super
+  end
 
   # protected
 
