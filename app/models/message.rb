@@ -6,10 +6,25 @@ class Message < ApplicationRecord
 
   before_create :confirm_participant
 
+  has_many_attached :attachments, dependent: :destroy
+
   def confirm_participant
     return unless room.is_private
 
     is_participant = Participant.where(user_id: self.user.id, room_id: self.room.id).first
     throw :abort unless is_participant
+  end
+
+  def chat_attachment(index)
+    target = attachments[index]
+    return unless attachments.attached?
+
+    if target.image?
+      target.variant(resize_to_limit: [150, 150]).processed
+    elsif target.video?
+      target.variant(resize_to_limit: [150, 150]).processed
+    else
+      target
+    end
   end
 end
